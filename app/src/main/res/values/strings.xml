@@ -3,4 +3,6 @@
     <string name="edit_message" translatable="false">Enter a message</string>
     <string name="button_send" translatable="false">Start Button</string>
     <string name="display_message" translatable="false">Teste nova página</string>
+    <string name="button_settings" translatable="false">Settings</string>
+    <string name="button_about" translatable="false">About</string>
 </resources>

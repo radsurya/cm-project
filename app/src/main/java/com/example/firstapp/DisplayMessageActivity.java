@@ -14,4 +14,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
     }
+
+    /** Called when the user taps the Settings button */
+    public void goToSettings(View view) {
+        // Intent intent = new Intent(this, DisplayMessageActivity.class);
+        // startActivity(intent);
+    }
+
+    /** Called when the user taps the About button */
+    public void goToAbout(View view) {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
 }
