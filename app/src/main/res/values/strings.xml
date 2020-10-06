@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name" translatable="false">Paint App</string>
+    <string name="app_name" translatable="false">PAINT APP</string>
     <string name="edit_message" translatable="false">Enter a message</string>
     <string name="button_send" translatable="false">Start Button</string>
-    <string name="display_message" translatable="false">Teste nova página</string>
     <string name="button_settings" translatable="false">Settings</string>
     <string name="button_about" translatable="false">About</string>
+    <string name="about_title" translatable="false">ABOUT</string>
+    <string name="element1" translatable="false">Diogo Frazão</string>
+    <string name="element2" translatable="false">Filipe Bastias</string>
+    <string name="element3" translatable="false">Mário Tavares</string>
+    <string name="element4" translatable="false">Radica Giva</string>
+    <string name="group_id" translatable="false">Grupo 12</string>
 </resources>

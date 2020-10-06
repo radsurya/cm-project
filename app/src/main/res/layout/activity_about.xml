@@ -7,13 +7,100 @@
     tools:context=".AboutActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="125dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:id="@+id/about_title"
+        android:layout_width="394dp"
+        android:layout_height="30dp"
         android:layout_marginTop="16dp"
-        android:text="About"
+        android:gravity="center"
+        android:text="@string/about_title"
+        android:textColor="#9C27B0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TableRow
+        android:layout_width="324dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:gravity="left"
+            android:padding="3dip"
+            android:text="@string/group_id"
+            android:textColor="#9C27B0" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="324dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="324dp"
+            android:layout_height="24dp"
+            android:gravity="left"
+            android:padding="3dip"
+            android:text="@string/element1" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="324dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="324dp"
+            android:layout_height="24dp"
+            android:gravity="left"
+            android:padding="3dip"
+            android:text="@string/element2" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="324dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="324dp"
+            android:layout_height="24dp"
+            android:gravity="left"
+            android:padding="3dip"
+            android:text="@string/element3" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="324dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="210dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="324dp"
+            android:layout_height="24dp"
+            android:gravity="left"
+            android:padding="3dip"
+            android:text="@string/element4" />
+    </TableRow>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
