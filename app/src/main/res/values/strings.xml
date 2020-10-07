@@ -10,4 +10,8 @@
     <string name="element3" translatable="false">Mário Tavares</string>
     <string name="element4" translatable="false">Radica Giva</string>
     <string name="group_id" translatable="false">Grupo 12</string>
+    <string name="settings_title" translatable="false">SETTINGS</string>
+    <string name="save_button" translatable="false">Save</string>
+    <string name="color_red" translatable="false">Red</string>
+    <string name="color_blue" translatable="false">Blue</string>
 </resources>

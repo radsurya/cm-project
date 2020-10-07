@@ -17,8 +17,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     /** Called when the user taps the Settings button */
     public void goToSettings(View view) {
-        // Intent intent = new Intent(this, DisplayMessageActivity.class);
-        // startActivity(intent);
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     /** Called when the user taps the About button */
