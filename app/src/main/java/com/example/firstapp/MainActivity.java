@@ -20,14 +20,22 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String color = intent.getStringExtra(SettingsActivity.BACKGORUND_NAME);
         View mainAppView = findViewById(R.id.main_app);
+        View mainAppTextView = findViewById(R.id.button_send);
 
+        // Change background color chosen in Settings screen
         if (color != null) {
             switch (color) {
+                case "blue":
+                    mainAppView.setBackgroundColor(Color.BLUE);
+                    break;
+                case "green":
+                    mainAppView.setBackgroundColor(Color.GREEN);
+                    break;
                 case "red":
                     mainAppView.setBackgroundColor(Color.RED);
                     break;
-                case "blue":
-                    mainAppView.setBackgroundColor(Color.BLUE);
+                case "yellow":
+                    mainAppView.setBackgroundColor(Color.YELLOW);
                     break;
                 default:
                     mainAppView.setBackgroundColor(Color.WHITE);

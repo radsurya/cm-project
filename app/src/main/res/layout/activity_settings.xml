@@ -6,15 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity"
     android:id="@+id/settings_page">
+
     <TextView
         android:id="@+id/settings_titile"
         android:layout_width="394dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/settings_title"
         android:textColor="#9C27B0"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,35 +26,70 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="448dp"
         android:onClick="saveSettings"
         android:text="@string/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radio-group" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_titile" />
 
     <RadioGroup
         android:id="@+id/radio-group"
-        android:layout_width="226dp"
-        android:layout_height="92dp"
+        android:layout_width="113dp"
+        android:layout_height="147dp"
         android:layout_marginTop="196dp"
-        app:layout_constraintTop_toBottomOf="@+id/settings_titile"
-        tools:layout_editor_absoluteX="92dp">
-
-        <RadioButton
-            android:id="@+id/color_red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/color_red" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_titile">
 
         <RadioButton
             android:id="@+id/color_blue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#0000FF"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/color_blue" />
+            android:text="@string/color_blue"
+            android:textColor="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/color_green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FF00"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/color_green"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/color_red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FF0000"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/color_red"
+            android:textColor="#FFFFFF" />
+
+
+        <RadioButton
+            android:id="@+id/color_yellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFF00"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/color_yellow"
+            android:textColor="#000000" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="238dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="108dp"
+        android:text="@string/settings_text1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_titile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

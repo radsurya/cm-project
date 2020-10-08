@@ -23,10 +23,9 @@ public class SplashActivity extends AppCompatActivity {
         }, 3000);
     }
 
+    // Show splash then show main screen
     private void showMainActivity() {
-        Intent intent = new Intent(
-                SplashActivity.this,MainActivity.class
-        );
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

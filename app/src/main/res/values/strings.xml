@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">PAINT APP</string>
     <string name="edit_message" translatable="false">Enter a message</string>
-    <string name="button_send" translatable="false">Start Button</string>
+    <string name="button_send" translatable="false">Start</string>
     <string name="button_settings" translatable="false">Settings</string>
     <string name="button_about" translatable="false">About</string>
     <string name="about_title" translatable="false">ABOUT</string>
@@ -11,8 +11,11 @@
     <string name="element4" translatable="false">Radica Giva</string>
     <string name="group_id" translatable="false">Grupo 12</string>
     <string name="settings_title" translatable="false">SETTINGS</string>
-    <string name="save_button" translatable="false">Save</string>
+    <string name="save_button" translatable="false">Change Color</string>
     <string name="color_red" translatable="false">Red</string>
     <string name="color_blue" translatable="false">Blue</string>
-    <string name="text_splashActivity_creator">Grupo 12</string>
+    <string name="text_splashActivity_creator" translatable="false">Grupo 12</string>
+    <string name="color_green" translatable="false">Green</string>
+    <string name="color_yellow" translatable="false">Yellow</string>
+    <string name="settings_text1" translatable="false">Choose color to change main screen background</string>
 </resources>
