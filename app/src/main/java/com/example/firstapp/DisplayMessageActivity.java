@@ -26,4 +26,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
+
+    /** Called when the user taps the About button */
+    public void goToPaint(View view) {
+        Intent intent = new Intent(this, PaintingActivity.class);
+        startActivity(intent);
+    }
 }
