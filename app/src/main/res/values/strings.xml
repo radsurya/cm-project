@@ -18,4 +18,6 @@
     <string name="color_green" translatable="false">Green</string>
     <string name="color_yellow" translatable="false">Yellow</string>
     <string name="settings_text1" translatable="false">Choose color to change main screen background</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

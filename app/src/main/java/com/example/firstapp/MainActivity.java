@@ -1,12 +1,14 @@
 package com.example.firstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String color = intent.getStringExtra(SettingsActivity.BACKGORUND_NAME);
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     mainAppView.setBackgroundColor(Color.WHITE);
                     break;
             }
-        }
+        }*/
     }
 
     /** Called when the user taps the Send button */

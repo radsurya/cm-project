@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_app"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_background"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <fragment
+        android:id="@+id/fragment_canvas_container"
+        android:name="com.example.firstapp.CanvasFragment"
+        android:layout_width="208dp"
+        android:layout_height="316dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="98dp" />
+
+    <fragment
+        android:id="@+id/fragment_palette_container"
+        android:name="com.example.firstapp.PaletteFragment"
+        android:layout_width="514dp"
+        android:layout_height="316dp"
+        android:layout_marginTop="42dp" />
+
+</LinearLayout>
