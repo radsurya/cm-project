@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class PaintingActivity extends AppCompatActivity {
 
@@ -21,6 +23,9 @@ public class PaintingActivity extends AppCompatActivity {
         // Set the first fragment by default
         if (mainFragment != null) {
             FirstFragment firstFragment = new FirstFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("teste", "teste valor");
+            firstFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, firstFragment).commit();
         }
 
@@ -29,6 +34,7 @@ public class PaintingActivity extends AppCompatActivity {
             FirstFragment firstFragmentLand = new FirstFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_first_land, firstFragmentLand).commit();
         }
+
         if (mainFragment2 != null) {
             SecondFragment secondFragmentLand = new SecondFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_second_land, secondFragmentLand).commit();
@@ -52,7 +58,6 @@ public class PaintingActivity extends AppCompatActivity {
             });
         }
 
-
         // Set the first fragment by clicking in pallet button
         final Button buttonF2 = (Button) findViewById(R.id.button_fragment2);
         if (buttonF2 != null) {
@@ -71,5 +76,6 @@ public class PaintingActivity extends AppCompatActivity {
             });
         }
         /* END - HANDLE FRAGMENTS */
+
     }
 }
