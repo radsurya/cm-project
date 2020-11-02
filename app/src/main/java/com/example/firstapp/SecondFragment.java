@@ -1,5 +1,7 @@
 package com.example.firstapp;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,12 @@ public class SecondFragment extends Fragment {
             if (imgBtnColor1 != null) {
                 imgBtnColor1.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        // Save clicked black color
+                        SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putString("penColor", "black");
+                        editor.commit();
+
                         Toast.makeText(getActivity(), "You clicked color black!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -38,11 +46,13 @@ public class SecondFragment extends Fragment {
             if (imgBtnColor2 != null) {
                 imgBtnColor2.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                    // Save clicked red color
+                    SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("penColor", "red");
+                    editor.commit();
 
-                        // TODO Save clicked color
-
-
-                        Toast.makeText(getActivity(), "You clicked color red!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "You clicked color red!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -50,15 +60,28 @@ public class SecondFragment extends Fragment {
             if (imgBtnColor3 != null) {
                 imgBtnColor3.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(), "You clicked color green!", Toast.LENGTH_SHORT).show();
+                    // Save clicked green color
+                    SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("penColor", "green");
+                    editor.commit();
+
+                    Toast.makeText(getActivity(), "You clicked color green!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
+
             if (imgBtnColor4 != null) {
                 imgBtnColor4.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(), "You clicked color blue!", Toast.LENGTH_SHORT).show();
+                    // Save clicked blue color
+                    SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("penColor", "blue");
+                    editor.commit();
+
+                    Toast.makeText(getActivity(), "You clicked color blue!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

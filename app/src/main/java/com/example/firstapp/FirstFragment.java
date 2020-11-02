@@ -1,5 +1,7 @@
 package com.example.firstapp;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -20,30 +22,30 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = this.getArguments();
-        System.out.println("------------ bundle");
-        System.out.println(bundle);
-        if (bundle != null) {
-            String mystr = bundle.getString("teste");
-            System.out.println("------------ mystr");
-            System.out.println(mystr);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /* HANDLE PAINTING */
+
+        /* Get clicked color from pallet */
+        SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
+        String pencolor = settings.getString("penColor", null);
+        System.out.println("------------ penColor");
+        System.out.println(pencolor);
+        /* End - Get clicked color from pallet */
+
+        /* Handle painting */
         GestureListener mGestureListener = new GestureListener();
         GestureDetector mGestureDetector = new GestureDetector(getContext(), mGestureListener);
         mGestureDetector.setIsLongpressEnabled(true);
         mGestureDetector.setOnDoubleTapListener(mGestureListener);
 
-        PaintCanvas paintCanvas = new PaintCanvas(getContext(), null, mGestureDetector);
+        PaintCanvas paintCanvas = new PaintCanvas(getContext(), null, mGestureDetector, pencolor);
         mGestureListener.setCanvas(paintCanvas);
-        /* END - HANDLE PAINTING */
+        /* End - Handle painting */
 
-        // Inflate the layout for this fragment
+        // Inflate the layout (paint) for this fragment
         return paintCanvas; //inflater.inflate(R.layout.fragment_first, container, false);
     }
 }

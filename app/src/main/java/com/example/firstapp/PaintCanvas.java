@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Switch;
 
 import java.util.Random;
 
@@ -16,20 +17,24 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     private Paint paint = new Paint();
     private Path path = new Path();
     private int backGroundColor = Color.WHITE;
+    private String penColor;
     private GestureDetector mGestureDetector;
 
     public PaintCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOnTouchListener(this);
         setBackgroundColor(backGroundColor);
+        paint.setColor(Color.BLACK);
         initPaint();
     }
 
-    public PaintCanvas(Context context, AttributeSet attrs, GestureDetector mGestureDetector) {
+    public PaintCanvas(Context context, AttributeSet attrs, GestureDetector mGestureDetector, String penColor) {
         super(context, attrs);
         this.mGestureDetector = mGestureDetector;
+        this.penColor = penColor;
         setOnTouchListener(this);
         setBackgroundColor(backGroundColor);
+        setPenColor(penColor);
         initPaint();
     }
 
@@ -85,8 +90,36 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     private void initPaint(){
         paint.setAntiAlias(true);
         paint.setStrokeWidth(20f);
-        paint.setColor(Color.BLACK);
+        // paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
+    }
+
+    /**
+     * Set pen color by given string of color
+     * @param penColorStr
+     */
+    public void setPenColor(String penColorStr) {
+        penColor = penColorStr;
+        if (penColorStr != null && penColorStr != "") {
+            switch (penColorStr) {
+                case "black":
+                    paint.setColor(Color.BLACK);
+                    break;
+                case "red":
+                    paint.setColor(Color.RED);
+                    break;
+                case "green":
+                    paint.setColor(Color.GREEN);
+                    break;
+                case "blue":
+                    paint.setColor(Color.BLUE);
+                    break;
+                default:
+                    paint.setColor(Color.BLACK);
+                    break;
+            }
+        }
+
     }
 }

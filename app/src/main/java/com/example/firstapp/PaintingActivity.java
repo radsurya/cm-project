@@ -23,9 +23,6 @@ public class PaintingActivity extends AppCompatActivity {
         // Set the first fragment by default
         if (mainFragment != null) {
             FirstFragment firstFragment = new FirstFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("teste", "teste valor");
-            firstFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, firstFragment).commit();
         }
 
