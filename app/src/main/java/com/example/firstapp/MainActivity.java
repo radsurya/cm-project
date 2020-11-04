@@ -3,8 +3,11 @@ package com.example.firstapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String color = intent.getStringExtra(SettingsActivity.BACKGORUND_NAME);
         View mainAppView = findViewById(R.id.main_app);
-        View mainAppTextView = findViewById(R.id.button_send);
 
         // Change background color chosen in Settings screen
         if (color != null) {
@@ -51,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
     /** Called when the user taps the start button */
     public void goToPage(View view) {
         Intent intent = new Intent(this, PaintingActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user taps the sensor button */
+    public void goToSensorPage(View view) {
+        Intent intent = new Intent(this, SensorActivity.class);
         startActivity(intent);
     }
 

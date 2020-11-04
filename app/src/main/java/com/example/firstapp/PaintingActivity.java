@@ -1,12 +1,18 @@
 package com.example.firstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class PaintingActivity extends AppCompatActivity {
 
@@ -15,7 +21,7 @@ public class PaintingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_painting);
 
-        /* HANDLE FRAGMENTS */
+        /* Handle Fragments */
         View mainFragment = findViewById(R.id.main_fragment);
         View mainFragment1 = findViewById(R.id.fragment_first_land);
         View mainFragment2 = findViewById(R.id.fragment_second_land);
@@ -72,7 +78,8 @@ public class PaintingActivity extends AppCompatActivity {
                 }
             });
         }
-        /* END - HANDLE FRAGMENTS */
+        /* End - Handle Fragments */
 
     }
+
 }
