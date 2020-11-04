@@ -32,13 +32,13 @@ public class SecondFragment extends Fragment {
             if (imgBtnColor1 != null) {
                 imgBtnColor1.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        // Save clicked black color
-                        SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("penColor", "black");
-                        editor.commit();
+                    // Save clicked black color
+                    SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("penColor", "black");
+                    editor.commit();
 
-                        Toast.makeText(getActivity(), "You clicked color black!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "You clicked color black!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

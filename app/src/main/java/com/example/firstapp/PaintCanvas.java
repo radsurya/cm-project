@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -33,8 +35,6 @@ public class PaintCanvas extends View implements View.OnTouchListener {
         this.mGestureDetector = mGestureDetector;
         this.penColor = penColor;
         setOnTouchListener(this);
-        setBackgroundColor(backGroundColor);
-        setPenColor(penColor);
         initPaint();
     }
 
@@ -84,13 +84,17 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     }
 
     public void erase(){
-        paint.setColor(backGroundColor);
+        paint.setColor(Color.WHITE);
+        setBackgroundColor(Color.WHITE);
+
+        // paint.setColor(backGroundColor);
     }
 
     private void initPaint(){
+        setBackgroundColor(backGroundColor);
+        setPenColor(penColor);
         paint.setAntiAlias(true);
         paint.setStrokeWidth(20f);
-        // paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
     }
@@ -119,7 +123,9 @@ public class PaintCanvas extends View implements View.OnTouchListener {
                     paint.setColor(Color.BLACK);
                     break;
             }
+        } else {
+            paint.setColor(Color.BLACK);
         }
-
     }
+
 }
