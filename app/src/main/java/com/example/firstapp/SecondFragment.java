@@ -1,7 +1,6 @@
 package com.example.firstapp;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +69,6 @@ public class SecondFragment extends Fragment {
                     }
                 });
             }
-
 
             if (imgBtnColor4 != null) {
                 imgBtnColor4.setOnClickListener(new View.OnClickListener() {

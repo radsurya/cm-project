@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.TextView;
+
 import java.util.List;
 
 public class SensorActivity extends AppCompatActivity implements SensorEventListener {
@@ -89,7 +90,6 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
                     yTextView.setTextColor(Color.RED);
                     zTextView.setTextColor(Color.RED);
                 }
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                 } else {

@@ -1,17 +1,15 @@
 package com.example.firstapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Switch;
 
 import java.util.Random;
 
@@ -26,36 +24,42 @@ public class PaintCanvas extends View implements View.OnTouchListener {
         super(context, attrs);
         setOnTouchListener(this);
         setBackgroundColor(backGroundColor);
-        paint.setColor(Color.BLACK);
+        setPenColor();
+        setBackgroudBySensor();
         initPaint();
     }
 
-    public PaintCanvas(Context context, AttributeSet attrs, GestureDetector mGestureDetector, String penColor) {
+    public PaintCanvas(Context context, AttributeSet attrs, GestureDetector mGestureDetector) {
         super(context, attrs);
         this.mGestureDetector = mGestureDetector;
-        this.penColor = penColor;
         setOnTouchListener(this);
+        setBackgroudBySensor();
         initPaint();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        System.out.println("------------ onDraw");
         canvas.drawPath(path, paint);// draws the path with the paint
     }
 
     @Override
     public boolean performClick(){
+        System.out.println("------------ performClick");
         return super.performClick();
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        System.out.println("------------ onTouch");
+        setPenColor();
         mGestureDetector.onTouchEvent(event);
         return false; // let the event go to the rest of the listeners
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        System.out.println("------------ onTouchEvent");
         float eventX = event.getX();
         float eventY = event.getY();
         switch (event.getAction()) {
@@ -84,15 +88,12 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     }
 
     public void erase(){
-        paint.setColor(Color.WHITE);
-        setBackgroundColor(Color.WHITE);
-
-        // paint.setColor(backGroundColor);
+        paint.setColor(backGroundColor);
     }
 
     private void initPaint(){
         setBackgroundColor(backGroundColor);
-        setPenColor(penColor);
+        setPenColor();
         paint.setAntiAlias(true);
         paint.setStrokeWidth(20f);
         paint.setStyle(Paint.Style.STROKE);
@@ -100,13 +101,16 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     }
 
     /**
-     * Set pen color by given string of color
-     * @param penColorStr
+     * Set pen color
      */
-    public void setPenColor(String penColorStr) {
-        penColor = penColorStr;
-        if (penColorStr != null && penColorStr != "") {
-            switch (penColorStr) {
+    public void setPenColor() {
+        /* Get clicked color from pallet */
+        SharedPreferences settings = getContext().getSharedPreferences("penColors", 0);
+        penColor = settings.getString("penColor", null);
+        /* End - Get clicked color from pallet */
+
+        if (penColor != null && penColor != "") {
+            switch (penColor) {
                 case "black":
                     paint.setColor(Color.BLACK);
                     break;
@@ -126,6 +130,23 @@ public class PaintCanvas extends View implements View.OnTouchListener {
         } else {
             paint.setColor(Color.BLACK);
         }
+    }
+
+    /**
+     * Set random background color of canvas from accelerometer sensor
+     */
+    public void setBackgroudBySensor() {
+        /* Get sensor warning to change background from shared preferences */
+        // SharedPreferences settings = getContext().getSharedPreferences("setBackgroundBySensor", 0);
+        // String warning = settings.getString("setBackgroundBySensorTrue", null);
+        /* End - Get sensor warning to change background from shared preferences */
+/*
+        if(warning !=null && warning.equals("true")) {
+            changeBackground();
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("setBackgroundBySensorTrue", null);
+            editor.commit();
+        }*/
     }
 
 }

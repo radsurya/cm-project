@@ -22,12 +22,6 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /* Get clicked color from pallet */
-        SharedPreferences settings = getActivity().getSharedPreferences("penColors", 0);
-        String pencolor = settings.getString("penColor", null);
-        System.out.println("------------ penColor");
-        System.out.println(pencolor);
-        /* End - Get clicked color from pallet */
 
         /* Handle painting */
         GestureListener mGestureListener = new GestureListener();
@@ -35,7 +29,7 @@ public class FirstFragment extends Fragment {
         mGestureDetector.setIsLongpressEnabled(true);
         mGestureDetector.setOnDoubleTapListener(mGestureListener);
 
-        PaintCanvas paintCanvas = new PaintCanvas(getContext(), null, mGestureDetector, pencolor);
+        PaintCanvas paintCanvas = new PaintCanvas(getContext(), null, mGestureDetector);
         mGestureListener.setCanvas(paintCanvas);
         /* End - Handle painting */
 

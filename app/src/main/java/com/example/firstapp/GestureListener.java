@@ -22,4 +22,10 @@ public class GestureListener extends GestureDetector.SimpleOnGestureListener imp
         canvas.erase();
         return false;
     }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        System.out.println("----------onSingleTapUp----");
+        return false;
+    }
 }
