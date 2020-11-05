@@ -3,13 +3,22 @@ package com.example.firstapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -51,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
     /** Called when the user taps the start button */
     public void goToPage(View view) {
         Intent intent = new Intent(this, PaintingActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user taps the Sensor Light button */
+    public void goToPageSensorLight(View view) {
+        Intent intent = new Intent(this, SensorLightActivity.class);
         startActivity(intent);
     }
 
