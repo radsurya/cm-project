@@ -12,4 +12,9 @@
         android:title="Settings"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/menu-item3"
+        android:icon="@drawable/ic_map"
+        android:title="Google Map"
+        app:showAsAction="ifRoom" />
+
 </menu>
