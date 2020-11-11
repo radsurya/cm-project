@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
                 return true;
             case R.id.menu_item3:
-                Intent intent3 = new Intent(this, MapActivity.class);
+                Intent intent3 = new Intent(this, MapsActivity.class);
                 startActivity(intent3);
                 return true;
         }

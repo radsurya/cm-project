@@ -22,4 +22,5 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="button_paint" translatable="false">Paint</string>
     <string name="button_sensor">SENSOR</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
