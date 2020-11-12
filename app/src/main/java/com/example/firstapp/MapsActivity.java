@@ -20,8 +20,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener, LocationListener {
 
     private GoogleMap mMap;
     private TextView longView, latView;
@@ -70,6 +72,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
+        // Add polylines to the map.
+        // Polylines are useful to show a route or some other connection between points.
+        Polyline polyline1 = mMap.addPolyline(new PolylineOptions()
+                .clickable(true)
+                .add(
+                        new LatLng(-122.084, 37.421 -122.084),
+                        new LatLng(-121.036, 36.321 -121.036),
+                        new LatLng( -120.446, 35.041 -120.446),
+                        new LatLng(-119.336, 34.341 -119.336)
+                ));
+
+        // Position the map's camera near Alice Springs in the center of Australia,
+        // and set the zoom factor so most of Australia shows on the screen.
+        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 4));
+        // mMap.animateCamera(CameraUpdateFactory.newLatLng(location));
+        // Set listeners for click events.
+        mMap.setOnPolylineClickListener(this);
+
+
         /*
         double latitude = currentLocation.getLatitude();
         double longitude = currentLocation.getLatitude();
@@ -115,7 +136,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             LatLng location = new LatLng(latitude, longitude);
             mMap.addMarker(new MarkerOptions().position(location).title("My Location"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(location));
+
+            // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 4));
 
             if (longView != null) {
                 longView.setText("Long: " + currentLocation.getLongitude());
@@ -134,4 +156,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+    @Override
+    public void onPolylineClick(Polyline polyline) {
+
+    }
 }
