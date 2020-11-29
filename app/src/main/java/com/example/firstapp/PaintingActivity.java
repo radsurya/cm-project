@@ -174,9 +174,6 @@ public class PaintingActivity extends AppCompatActivity implements SensorEventLi
                     /* Sava canvas to Firebase database */
                     reff = FirebaseDatabase.getInstance().getReference();
                     reff.child("paintData").setValue(paintDataList);
-
-                    System.out.println("SAVE paintDataList: " + paintDataList);
-
                     /* End - Sava canvas to Firebase database */
                 }
             });
@@ -208,7 +205,7 @@ public class PaintingActivity extends AppCompatActivity implements SensorEventLi
                 editor.putString("setBackgroundBySensorTrue", "true");
                 editor.commit();
 
-                Toast.makeText(this, "TODO Change background", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Mobile is vibrating", Toast.LENGTH_SHORT).show();
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));

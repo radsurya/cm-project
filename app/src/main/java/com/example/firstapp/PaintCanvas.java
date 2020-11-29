@@ -11,21 +11,13 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-
-import androidx.annotation.RequiresApi;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
-import static android.graphics.Path.Op.INTERSECT;
 
 public class PaintCanvas extends View implements View.OnTouchListener {
     private Paint paint = new Paint();
@@ -36,7 +28,7 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     private float initialX, initialY;
     private List<List> paintDataList= new ArrayList<List>();
     private List<PaintData> paintDataLine = new ArrayList<PaintData>();
-
+    int countLine = 0;
 
     public PaintCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -58,6 +50,8 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         System.out.println("------------ onDraw");
+        System.out.println("------------ onDraw path");
+        System.out.println(path);
         canvas.drawPath(path, paint);// draws the path with the paint
     }
 
@@ -83,6 +77,7 @@ public class PaintCanvas extends View implements View.OnTouchListener {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                countLine = countLine + 1;
                 initialX = xPos;
                 initialY = yPos;
                 path.moveTo(xPos, yPos); // updates the path initial point
@@ -103,9 +98,7 @@ public class PaintCanvas extends View implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_UP:// when you lift your finger
                 performClick();
-
                 paintDataList.add(paintDataLine);
-
                 /* Save canvas data to shared preferences */
                 SharedPreferences mPrefs = getContext().getSharedPreferences("paintDataList", MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -124,6 +117,9 @@ public class PaintCanvas extends View implements View.OnTouchListener {
 
         // Schedules a repaint.
         invalidate();
+
+        System.out.println("--------------- countLine");
+        System.out.println(countLine);
         return true;
     }
 
@@ -178,12 +174,11 @@ public class PaintCanvas extends View implements View.OnTouchListener {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void loadPainting(List<List<PaintData>> loadPaintData) {
-        System.out.println("---------- loadPaintData Func: " + loadPaintData);
-        if (loadPaintData != null) {
-            Canvas canvas = new Canvas();
+        List<Path> pathList = new ArrayList<Path>();
+        Canvas canvas = new Canvas();
 
+        if (loadPaintData != null) {
             for (int i = 0; i < loadPaintData.size(); i++) {
                 List<PaintData> currentLine = loadPaintData.get(i);
                 path = new Path();
@@ -196,15 +191,17 @@ public class PaintCanvas extends View implements View.OnTouchListener {
                     } else {
                         path.lineTo(currentPaint.getFinalX(), currentPaint.getFinalY());
                     }
-
                 }
-                canvas.drawPath(path, paint);
-                // path.close();
-                // Schedules a repaint.
-                invalidate();
+                pathList.add(path);
+            }
 
+            for (Path path: pathList) {
+                canvas.drawPath(path, paint);
+                invalidate();
             }
         }
+
+
     }
 
     /**

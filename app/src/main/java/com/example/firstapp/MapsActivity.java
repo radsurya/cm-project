@@ -28,6 +28,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private TextView longView, latView;
     Location currentLocation;
+    private boolean started = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +75,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add polylines to the map.
         // Polylines are useful to show a route or some other connection between points.
-        Polyline polyline1 = mMap.addPolyline(new PolylineOptions()
+        mMap.addPolyline(new PolylineOptions()
                 .clickable(true)
                 .add(
                         new LatLng(-122.084, 37.421 -122.084),
                         new LatLng(-121.036, 36.321 -121.036),
                         new LatLng( -120.446, 35.041 -120.446),
-                        new LatLng(-119.336, 34.341 -119.336)
+                        new LatLng(-119.336, 34.341 -119.336),
+                        new LatLng(-119.336, 34.341 -129.336),
+                        new LatLng(-129.336, 34.341 -121.336),
+                        new LatLng(-149.336, 34.341 -139.336)
                 ));
 
         // Position the map's camera near Alice Springs in the center of Australia,
@@ -118,8 +122,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mapBtn != null) {
             String btnText = (String)mapBtn.getText();
             if (btnText.equals("Start Drawing")) {
+                started = true;
                 mapBtn.setText("Stop Drawing");
             } else {
+                started = false;
                 mapBtn.setText("Start Drawing");
             }
         }
@@ -145,6 +151,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             if (latView != null) {
                 latView.setText("Lat: " + currentLocation.getLatitude());
+            }
+
+            if (started) {
+                mMap.addPolyline(new PolylineOptions()
+                        .clickable(true)
+                        .add(new LatLng(currentLocation.getLongitude(), currentLocation.getLatitude())));
+                mMap.setOnPolylineClickListener(this);
             }
         }
     }

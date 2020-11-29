@@ -54,18 +54,15 @@ public class FirstFragment extends Fragment {
         if(view != null) {
             view.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    System.out.println("----------reff");
                     reff = FirebaseDatabase.getInstance().getReference();
                     reff.child("paintData").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            // List<PaintData> loadPaintData = (List<PaintData>) dataSnapshot.getValue();
-
                             GenericTypeIndicator<List<List<PaintData>>> t = new GenericTypeIndicator<List<List<PaintData>>>() {};
                             List<List<PaintData>> loadPaintData = dataSnapshot.getValue(t);
-
-                            mGestureListener.loadPainting(loadPaintData);
-                            System.out.println("Value is: " + loadPaintData);
+                            if (loadPaintData != null) {
+                                mGestureListener.loadPainting(loadPaintData);
+                            }
                         }
 
                         @Override
