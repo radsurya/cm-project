@@ -19,6 +19,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import android.content.Context;
 import android.graphics.Color;
@@ -33,7 +36,18 @@ import android.os.Vibrator;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
+
 import java.util.List;
+import java.util.UUID;
 
 public class PaintingActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -47,6 +61,8 @@ public class PaintingActivity extends AppCompatActivity implements SensorEventLi
     private float shakeThreshold = 5f;
     private Vibrator vibrator;
     private String toChangeCanvasBackground = "0";
+
+    DatabaseReference reff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +157,31 @@ public class PaintingActivity extends AppCompatActivity implements SensorEventLi
             });
         }
         /* End - Handle Fragments */
+
+        // Save paint data
+        final Button buttonSavePaint = (Button) findViewById(R.id.button_save_paint);
+        if (buttonSavePaint != null) {
+            buttonSavePaint.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    /* Get canvas from shared preferences */
+                    SharedPreferences mPrefs = getSharedPreferences("paintDataList", MODE_PRIVATE);
+                    Gson gson = new Gson();
+                    String json = mPrefs.getString("data", "");
+                    Type type = new TypeToken<List<List>>() {}.getType();
+                    List<List> paintDataList = new Gson().fromJson(json, type);
+                    /* End - Get canvas from shared preferences */
+
+                    /* Sava canvas to Firebase database */
+                    reff = FirebaseDatabase.getInstance().getReference();
+                    reff.child("paintData").setValue(paintDataList);
+
+                    System.out.println("SAVE paintDataList: " + paintDataList);
+
+                    /* End - Sava canvas to Firebase database */
+                }
+            });
+        }
+        /* End - Save paint data */
     }
 
     @Override

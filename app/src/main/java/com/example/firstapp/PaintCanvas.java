@@ -6,12 +6,26 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
+import androidx.annotation.RequiresApi;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
+
+import static android.content.Context.MODE_PRIVATE;
+import static android.graphics.Path.Op.INTERSECT;
 
 public class PaintCanvas extends View implements View.OnTouchListener {
     private Paint paint = new Paint();
@@ -19,12 +33,16 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     private int backGroundColor = Color.WHITE;
     private String penColor;
     private GestureDetector mGestureDetector;
+    private float initialX, initialY;
+    private List<List> paintDataList= new ArrayList<List>();
+    private List<PaintData> paintDataLine = new ArrayList<PaintData>();
+
 
     public PaintCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOnTouchListener(this);
         setBackgroundColor(backGroundColor);
-        setPenColor();
+        setPenColor(null);
         setBackgroudBySensor();
         initPaint();
     }
@@ -52,7 +70,7 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         System.out.println("------------ onTouch");
-        setPenColor();
+        setPenColor(null);
         mGestureDetector.onTouchEvent(event);
         return false; // let the event go to the rest of the listeners
     }
@@ -60,17 +78,45 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         System.out.println("------------ onTouchEvent");
-        float eventX = event.getX();
-        float eventY = event.getY();
+        float xPos = event.getX();
+        float yPos = event.getY();
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                path.moveTo(eventX, eventY);// updates the path initial point
+                initialX = xPos;
+                initialY = yPos;
+                path.moveTo(xPos, yPos); // updates the path initial point
                 return true;
             case MotionEvent.ACTION_MOVE:
-                path.lineTo(eventX, eventY);// makes a line to the point each time this event is fired
+                /* Save canvas data movement */
+                PaintData paintData = new PaintData();
+                paintData.setInitialX(initialX);
+                paintData.setInitialY(initialY);
+                paintData.setFinalX(xPos);
+                paintData.setFinalY(yPos);
+                paintData.setBackgroundColor(backGroundColor);
+                paintData.setPenColor(penColor);
+                paintDataLine.add(paintData);
+                /* End - Save canvas data movement */
+
+                path.lineTo(xPos, yPos);// makes a line to the point each time this event is fired
                 break;
             case MotionEvent.ACTION_UP:// when you lift your finger
                 performClick();
+
+                paintDataList.add(paintDataLine);
+
+                /* Save canvas data to shared preferences */
+                SharedPreferences mPrefs = getContext().getSharedPreferences("paintDataList", MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(paintDataList);
+                prefsEditor.putString("data", json);
+                prefsEditor.commit();
+                /* End - Save canvas data to shared preferences */
+
+                // Empty list
+                paintDataLine.clear();
                 break;
             default:
                 return false;
@@ -93,7 +139,7 @@ public class PaintCanvas extends View implements View.OnTouchListener {
 
     private void initPaint(){
         setBackgroundColor(backGroundColor);
-        setPenColor();
+        setPenColor(null);
         paint.setAntiAlias(true);
         paint.setStrokeWidth(20f);
         paint.setStyle(Paint.Style.STROKE);
@@ -103,10 +149,10 @@ public class PaintCanvas extends View implements View.OnTouchListener {
     /**
      * Set pen color
      */
-    public void setPenColor() {
+    public void setPenColor(String penColorAux) {
         /* Get clicked color from pallet */
         SharedPreferences settings = getContext().getSharedPreferences("penColors", 0);
-        penColor = settings.getString("penColor", null);
+        penColor = penColorAux != null ? penColorAux : settings.getString("penColor", null);
         /* End - Get clicked color from pallet */
 
         if (penColor != null && penColor != "") {
@@ -129,6 +175,35 @@ public class PaintCanvas extends View implements View.OnTouchListener {
             }
         } else {
             paint.setColor(Color.BLACK);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void loadPainting(List<List<PaintData>> loadPaintData) {
+        System.out.println("---------- loadPaintData Func: " + loadPaintData);
+        if (loadPaintData != null) {
+            Canvas canvas = new Canvas();
+
+            for (int i = 0; i < loadPaintData.size(); i++) {
+                List<PaintData> currentLine = loadPaintData.get(i);
+                path = new Path();
+                for (int j = 0; j < currentLine.size(); j++) {
+                    PaintData currentPaint = currentLine.get(j);
+                    setPenColor(currentPaint.getPenColor());
+
+                    if (j == 0) {
+                        path.moveTo(currentPaint.getInitialX(), currentPaint.getInitialY());
+                    } else {
+                        path.lineTo(currentPaint.getFinalX(), currentPaint.getFinalY());
+                    }
+
+                }
+                canvas.drawPath(path, paint);
+                // path.close();
+                // Schedules a repaint.
+                invalidate();
+
+            }
         }
     }
 
