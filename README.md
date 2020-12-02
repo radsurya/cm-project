@@ -1,11 +1,11 @@
-## Paint App
+# Paint App
 
-# Introduction
+## Introduction
 In this repository you can find an android mobile app.
 This application was created within the scope of the Mobile Computing subject of Informatics Master with the support of Professor Tiago Gurreiro.
 Here is a small video demo: [DEMO PAINT APP](https://drive.google.com/file/d/1BUqp4dVmR9_ijIhxtbHAi1MZMt9ZgnYo/view?usp=sharing)
 
-# Features
+## Features
 The project was divided by 6 assigments:
 - Assigment 1:
   - Splash intro page
@@ -28,7 +28,7 @@ The project was divided by 6 assigments:
   - Included firebase database to save drawing
   - Load the latest saved drawing
 
-# Team
+## Team
 This project was developed by:
 - Diogo Frazão
 - Filipe Bastias
